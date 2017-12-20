@@ -8,27 +8,31 @@ router.post('/', (req, res) => {
       if (err) {
           res.status(500).send(err);
       }
-      res.status(200).send(`add user name is ${req.body.username}`)
+      Partner.find(function (err, partner) {
+        if(err) return console.error(err);
+        res.send(partner);
+      })
   });
 })
 
-router.delete('/:id', (req, res) => {
-  let id = req.params.id;
+router.delete('/:name', (req, res) => {
+  let name = req.params.name;
 
-  Partner.findByIdAndRemove(id, (err, todo) => {
+
+  Partner.findOneAndRemove({name: name}, (err, todo) => {
       if(todo == null){
           res.status(404).send('server error')
           return;
       } else if(err){
           res.status(500).send(err)
       } else {
-          let response = {
-              message: "Successfully deleted",
-              id: todo._id
-          };
-          res.status(200).send(response);
+          Partner.find(function (err, partner) {
+            if(err) return console.error(err);
+            res.send(partner);
+          })
       }
   });
+
 })
 
 router.get('/', (req, res) => { 
