@@ -9,7 +9,7 @@ const JwtStrategy = passportJWT.Strategy;
 const book = require('./Router/book');
 const user = require('./Router/user');
 const auth = require('./Router/auth');
-
+const partner = require('./Router/partner');
 
 let jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -40,7 +40,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use('/api/books', book);
 app.use('/auth', auth);
-app.use('/api/user', user)
+app.use('/api/user', user);
+app.use('/api/partner', partner);
 
 app.listen(3000);
 
