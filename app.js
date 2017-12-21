@@ -10,6 +10,7 @@ const book = require('./Router/book');
 const user = require('./Router/user');
 const auth = require('./Router/auth');
 const partner = require('./Router/partner');
+const product = require('./Router/product');
 
 let jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -17,7 +18,6 @@ jwtOptions.secretOrKey = 'superSecretKey';
 
 const Users = require('./Model/users');
 let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-  //database
   let name = req.params.name;
   Users.findOne({username: name},(err, user) => {
       if(err) return console.error(err);
@@ -42,6 +42,7 @@ app.use('/api/books', book);
 app.use('/auth', auth);
 app.use('/api/user', user);
 app.use('/api/partner', partner);
+app.use('/api/product', product);
 
 app.listen(3000);
 

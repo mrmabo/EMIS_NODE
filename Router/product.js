@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const Partner = require('../Model/partners');
+const Product = require('../Model/products');
+var mongoose = require('mongoose');
+
 
 router.post('/', (req, res) => {
-  let newPartner = new Partner(req.body)
-  newPartner.save((err, createdTodoObject) => {  
+  let newProduct = new Product(req.body);
+  newProduct.save((err, createdTodoObject) => {  
       if (err) {
           res.status(500).send(err);
       }
-      Partner.find(function (err, partner) {
+      Product.find(function (err, product) {
         if(err) return console.error(err);
-        res.send(partner);
+        res.send(product);
       })
   });
 })
@@ -19,16 +21,16 @@ router.delete('/:id', (req, res) => {
   let id = req.params.id;
 
 
-  Partner.findByIdAndRemove(id, (err, todo) => {
+  Product.findByIdAndRemove(id, (err, todo) => {
       if(todo == null){
           res.status(404).send('server error')
           return;
       } else if(err){
           res.status(500).send(err)
       } else {
-          Partner.find(function (err, partner) {
+          Product.find(function (err, product) {
             if(err) return console.error(err);
-            res.send(partner);
+            res.send(product);
           })
       }
   });
@@ -36,17 +38,17 @@ router.delete('/:id', (req, res) => {
 })
 
 router.get('/', (req, res) => { 
-  Partner.find(function (err, partner) {
+  Product.find(function (err, product) {
     if(err) return console.error(err);
-    res.send(partner);
+    res.send(product);
   })
 })
 
 router.get('/:name', (req,res) => {
   let name = req.params.name;
-  Partner.findOne({name: name},(err, partner) => {
+  Product.findOne({name: name},(err, product) => {
       if(err) return console.error(err);
-      res.send(partner);
+      res.send(product);
   })
 })
 
