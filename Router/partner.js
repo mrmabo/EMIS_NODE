@@ -36,6 +36,11 @@ router.delete('/:id', (req, res) => {
 })
 
 router.get('/', (req, res) => { 
+  // Partner.get(null)
+  //   .then(data => {
+  //     res.send(data)
+  //   })
+  //   .catch(err => console.error(err))
   Partner.find(function (err, partner) {
     if(err) return console.error(err);
     res.send(partner);

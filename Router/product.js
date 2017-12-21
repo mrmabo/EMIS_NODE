@@ -44,9 +44,9 @@ router.get('/', (req, res) => {
   })
 })
 
-router.get('/:name', (req,res) => {
-  let name = req.params.name;
-  Product.findOne({name: name},(err, product) => {
+router.get('/:id', (req,res) => {
+  let id = req.params.id;
+  Product.findById(id,(err, product) => {
       if(err) return console.error(err);
       res.send(product);
   })

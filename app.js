@@ -11,6 +11,7 @@ const user = require('./Router/user');
 const auth = require('./Router/auth');
 const partner = require('./Router/partner');
 const product = require('./Router/product');
+const brand = require('./Router/brand');
 
 let jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -43,6 +44,7 @@ app.use('/auth', auth);
 app.use('/api/user', user);
 app.use('/api/partner', partner);
 app.use('/api/product', product);
+app.use('/api/brand', brand)
 
 app.listen(3000);
 
